@@ -1,0 +1,86 @@
+{
+  "origem": "https://titorion.i-game.tech/#/pressKey",
+  "geradoEm": "2026-11-13T21:57:54.675Z",
+  "paginas": [
+    {
+      "url": "https://titorion.i-game.tech/",
+      "arquivo": "index.html",
+      "titulo": "keyboard"
+    }
+  ],
+  "recursos": 122,
+  "bytes": 11584591,
+  "falhas": [
+    {
+      "url": "https://apitest.i-game.tech/api/device/upgrade",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Source+Han+Sans+SC:wght@300;400;500;600&display=swap",
+      "error": "HTTP 400",
+      "status": 400
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/skyshiu_logo.jpg",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/MK812-drak-logo.png",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/MK812-light-logo.png",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/tkjy_logo.jpg",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/KG27_logo.png",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/K80_logo.png",
+      "error": "HTTP 404",
+      "status": 404
+    },
+    {
+      "url": "https://titorion.i-game.tech/assets/MK010_logo.png",
+      "error": "HTTP 404",
+      "status": 404
+    }
+  ],
+  "opcoes": {
+    "depth": 2,
+    "maxPages": 60,
+    "maxResources": 4000,
+    "concurrency": 8,
+    "maxFileMB": 80,
+    "scroll": true,
+    "scrollPasses": 1,
+    "scrollDwell": 380,
+    "scrollStep": 0.7,
+    "repousoMs": 45000,
+    "repousoQuietoMs": 4000,
+    "hover": false,
+    "reload": true,
+    "deepScanJs": true,
+    "includeMedia": true,
+    "skipAnalytics": true,
+    "saveSnapshot": false,
+    "apiCache": true,
+    "blockServiceWorker": true,
+    "verboseRuntime": true,
+    "crossOriginAssets": true,
+    "designSystem": true,
+    "focarAba": true,
+    "plataforma": "windows"
+  }
+}
