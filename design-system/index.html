@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system de https://titorion.i-game.tech/#/pressKey</title>
+<style>
+@font-face{font-family:"Roboto";src:url("../_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Roboto";src:url("../_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Roboto";src:url("../_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"Noto Sans SC";src:url("../_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.4.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Noto Sans SC";src:url("../_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.4.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Noto Sans SC";src:url("../_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.4.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap;}
+
+:root{
+  color-scheme:dark;
+  --bg:#0a0a0b; --sup:#121214; --sup2:#18181c;
+  --linha:rgba(255,255,255,.07); --linha2:rgba(255,255,255,.13);
+  --fg:#f4f4f5; --dim:#a1a1aa; --mute:#83838f;
+  --ac:#d4ff3f; --ok:#5ee39b; --warn:#fbbf24; --err:#fb7185;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:400 13.5px/1.6 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+  -webkit-font-smoothing:antialiased}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+
+header{padding:44px 40px 32px;border-bottom:1px solid var(--linha)}
+h1{margin:0 0 8px;font-size:32px;font-weight:500;letter-spacing:-.035em}
+.origem{color:var(--dim);font-size:14px;margin:0 0 24px}
+.origem a{color:var(--ac);text-decoration:none}
+.resumo{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--sup);border:1px solid var(--linha);border-radius:99px;
+  padding:6px 14px;font-size:12px;color:var(--dim)}
+.chip b{color:var(--fg);font-weight:550}
+
+nav{position:sticky;top:0;z-index:10;display:flex;gap:4px;flex-wrap:wrap;
+  padding:12px 40px;background:rgba(10,10,11,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--linha)}
+nav a{color:var(--mute);text-decoration:none;font-size:12.5px;padding:6px 12px;border-radius:99px}
+nav a:hover{color:var(--fg);background:var(--sup2)}
+
+main{max-width:1180px;margin:0 auto;padding:8px 40px 80px}
+section{padding:44px 0;border-bottom:1px solid var(--linha)}
+section:last-child{border-bottom:0}
+h2{margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mute)}
+h3{margin:32px 0 6px;font-size:15px;font-weight:550;letter-spacing:-.01em}
+h3:first-of-type{margin-top:20px}
+h3 em{font-style:normal;color:var(--mute);font-weight:400;font-size:12px;margin-left:6px}
+.ajuda{margin:0 0 18px;color:var(--mute);font-size:12.5px;max-width:70ch;line-height:1.65}
+
+.grade-cores{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;margin-bottom:8px}
+.cor .amostra{height:76px;border-radius:10px;border:1px solid var(--linha2);margin-bottom:8px}
+.cor code{display:block;margin-bottom:3px}
+.cor .meta{display:flex;flex-direction:column;gap:2px;font-size:10.5px;color:var(--mute)}
+.cor.destacada .amostra{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+.base{color:var(--ac);font-weight:600}
+.selo{display:inline-block;padding:1px 5px;border-radius:4px;font-size:9.5px;font-weight:600;margin-left:3px}
+.selo.bom{background:rgba(94,227,155,.15);color:var(--ok)}
+.selo.ok{background:rgba(212,255,63,.15);color:var(--ac)}
+.selo.fraco{background:rgba(251,191,36,.15);color:var(--warn)}
+.selo.ruim{background:rgba(251,113,133,.15);color:var(--err)}
+
+.lista .linha{display:flex;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.amostra-fonte{font-size:26px;min-width:190px;letter-spacing:-.01em}
+.sub{display:block;color:var(--mute);font-size:11.5px;margin-top:2px;word-break:break-all}
+
+.estilos{display:grid;gap:2px}
+.estilo{padding:18px 20px;background:var(--sup);border-radius:10px}
+.rotulo{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:11.5px;color:var(--mute)}
+.rotulo b{color:var(--fg);font-size:12.5px}
+.demo{margin-bottom:10px;color:var(--fg);overflow-wrap:anywhere}
+.specs{display:flex;flex-wrap:wrap;gap:8px}
+.specs span{font-size:10.5px;color:var(--mute);background:var(--sup2);padding:2px 8px;border-radius:99px}
+
+.tabela{display:grid;gap:1px;background:var(--linha);border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+.tabela>div{background:var(--sup);padding:11px 16px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.tabela span{font-size:11.5px;color:var(--mute)}
+
+.escala{display:grid;gap:7px}
+.passo{display:flex;align-items:center;gap:14px}
+.passo .barra{height:14px;background:var(--ac);border-radius:3px;min-width:3px;opacity:.8}
+.passo code{color:var(--mute);white-space:nowrap}
+
+.formas{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:8px}
+.forma{text-align:center}
+.forma .quad{width:84px;height:84px;background:var(--sup2);border:1px solid var(--linha2);margin-bottom:7px}
+.forma .quad.clara{background:#e8e8ea;border:0}
+.forma code{color:var(--mute);font-size:10.5px}
+.quebra{display:block;max-width:110px;word-break:break-all;line-height:1.4}
+
+.mov{display:grid;gap:14px;margin-bottom:8px}
+.trilho{position:relative;height:38px;background:var(--sup);border-radius:8px;padding:0 12px;
+  display:flex;align-items:center;cursor:pointer}
+.bolinha{width:14px;height:14px;border-radius:50%;background:var(--ac);
+  transition:transform var(--d) var(--c)}
+.trilho:hover .bolinha{transform:translateX(calc(100% + 34vw))}
+.rot{margin-left:auto;display:flex;gap:12px;align-items:baseline}
+.rot span{font-size:11px;color:var(--mute)}
+
+.pastilhas{display:flex;flex-wrap:wrap;gap:6px}
+.pastilhas code{background:var(--sup2);padding:4px 10px;border-radius:99px;color:var(--dim)}
+
+.bps{display:grid;gap:12px}
+.bp .regua{height:5px;background:var(--sup2);border-radius:99px;margin-bottom:6px;overflow:hidden}
+.bp .regua span{display:block;height:100%;background:var(--ac);opacity:.75}
+.bp code{margin-right:10px}
+
+.vars{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;
+  background:var(--linha);border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+.var{background:var(--sup);padding:9px 14px;display:flex;align-items:center;gap:10px}
+.var i{width:15px;height:15px;border-radius:4px;border:1px solid var(--linha2);flex:none}
+.var i.vazio{background:var(--sup2)}
+.var code{color:var(--ac);white-space:nowrap}
+.var span{color:var(--mute);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+footer{padding:32px 40px 60px;color:var(--mute);font-size:12px;max-width:1180px;margin:0 auto;line-height:1.7}
+footer code{color:var(--dim)}
+@media (max-width:700px){header,nav,main,footer{padding-left:20px;padding-right:20px}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Design system</h1>
+  <p class="origem">extraído de <a href="https://titorion.i-game.tech/#/pressKey">https://titorion.i-game.tech/#/pressKey</a></p>
+  <div class="resumo">
+    <span class="chip">tema <b>escuro</b></span>
+    <span class="chip">contraste base <b>18.97:1</b></span>
+    <span class="chip"><b>9</b> cores</span>
+    <span class="chip"><b>6</b> estilos de texto</span>
+    <span class="chip"><b>151</b> variáveis</span>
+    <span class="chip"><b>671</b> elementos analisados</span>
+    <span class="chip"><b>1</b> página(s)</span>
+  </div>
+</header>
+
+<nav><a href="#cores">Cores</a><a href="#tipografia">Tipografia</a><a href="#espacamento">Espaçamento</a><a href="#formas">Formas</a><a href="#movimento">Movimento</a><a href="#breakpoints">Breakpoints</a><a href="#variaveis">Variáveis do site</a></nav>
+
+<main>
+  <section id="cores"><h2>Cores</h2><h3>Fundos <em>4</em></h3><p class="ajuda">As superfícies do site. A marcada como <b>base</b> é a do &lt;body&gt;: foi a escolha de quem fez o site, não um palpite estatístico.</p><div class="grade-cores">
+        <div class="cor destacada">
+          <div class="amostra" style="background:#0a0a0a"></div>
+          <code>#0a0a0a</code>
+          <div class="meta">
+            <span>hsl 0 0% 4%</span>
+            <span class="base">fundo base</span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#262626"></div>
+          <code>#262626</code>
+          <div class="meta">
+            <span>hsl 0 0% 15%</span>
+            <span title="contraste contra o fundo base">1.31:1</span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#2f2f2f"></div>
+          <code>#2f2f2f</code>
+          <div class="meta">
+            <span>hsl 0 0% 18%</span>
+            <span title="contraste contra o fundo base">1.48:1</span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#0f172a"></div>
+          <code>#0f172a</code>
+          <div class="meta">
+            <span>hsl 222 47% 11%</span>
+            <span title="contraste contra o fundo base">1.11:1</span>
+          </div>
+        </div></div><h3>Textos <em>4</em></h3><p class="ajuda">Cores aplicadas sobre conteúdo textual. O selo mede o contraste contra o fundo base.</p><div class="grade-cores">
+        <div class="cor">
+          <div class="amostra" style="background:#fafafa"></div>
+          <code>#fafafa</code>
+          <div class="meta">
+            <span>hsl 0 0% 98%</span>
+            <span title="contraste contra o fundo base">18.97:1 <span class="selo bom">AAA</span></span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#a3a3a3"></div>
+          <code>#a3a3a3</code>
+          <div class="meta">
+            <span>hsl 0 0% 64%</span>
+            <span title="contraste contra o fundo base">7.85:1 <span class="selo bom">AAA</span></span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#171717"></div>
+          <code>#171717</code>
+          <div class="meta">
+            <span>hsl 0 0% 9%</span>
+            <span title="contraste contra o fundo base">1.1:1 <span class="selo ruim">baixo</span></span>
+          </div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#94a3b8"></div>
+          <code>#94a3b8</code>
+          <div class="meta">
+            <span>hsl 215 20% 65%</span>
+            <span title="contraste contra o fundo base">7.72:1 <span class="selo bom">AAA</span></span>
+          </div>
+        </div></div><h3>Acentos <em>1</em></h3><p class="ajuda">Cores saturadas: botões, links, destaques e estados.</p><div class="grade-cores">
+        <div class="cor">
+          <div class="amostra" style="background:#22c55e"></div>
+          <code>#22c55e</code>
+          <div class="meta">
+            <span>hsl 142 71% 45%</span>
+            <span title="contraste contra o fundo base">8.69:1 <span class="selo bom">AAA</span></span>
+          </div>
+        </div></div></section>
+  <section id="tipografia"><h2>Tipografia</h2><h3>Famílias</h3><div class="lista"><div class="linha">
+        <div class="amostra-fonte" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;">Aa Bb Cc 123</div>
+        <div><code>RobotoRegular</code><span class="sub">RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;</span></div>
+      </div></div><h3>Estilos de texto <em>6</em></h3><p class="ajuda">Combinações de família, tamanho, peso e entrelinha que se repetem no site. A amostra é texto real da página.</p><div class="estilos"><div class="estilo">
+        <div class="rotulo"><b>Corpo</b><code>div</code><span>3×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:15.6px;font-weight:700;line-height:23.4px;letter-spacing:normal;text-transform:none">Configurações de iluminação</div>
+        <div class="specs">
+          <span>15.6px</span><span>peso 700</span>
+          <span>linha 23.4px</span>
+        </div>
+      </div><div class="estilo">
+        <div class="rotulo"><b>Corpo</b><code>div</code><span>1×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:15.6px;font-weight:400;line-height:23.4px;letter-spacing:normal;text-transform:none">NOCLIPConectadoMapeamento de teclasConfigurações de atuaçãoConfigurações de iluminaçãoTogg</div>
+        <div class="specs">
+          <span>15.6px</span><span>peso 400</span>
+          <span>linha 23.4px</span>
+        </div>
+      </div><div class="estilo">
+        <div class="rotulo"><b>Corpo pequeno</b><code>div</code><span>1×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:13.65px;font-weight:500;line-height:19.5px;letter-spacing:0.34125px;text-transform:none">NOCLIP</div>
+        <div class="specs">
+          <span>13.65px</span><span>peso 500</span>
+          <span>linha 19.5px</span><span>tracking 0.34125px</span>
+        </div>
+      </div><div class="estilo">
+        <div class="rotulo"><b>Corpo pequeno</b><code>button</code><span>9×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:13.65px;font-weight:500;line-height:19.5px;letter-spacing:normal;text-transform:none">Combinação de teclas</div>
+        <div class="specs">
+          <span>13.65px</span><span>peso 500</span>
+          <span>linha 19.5px</span>
+        </div>
+      </div><div class="estilo">
+        <div class="rotulo"><b>Legenda</b><code>div</code><span>2×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:11.7px;font-weight:400;line-height:15.6px;letter-spacing:normal;text-transform:none">Por favor, selecione primeiro o botão da matriz superior e, em seguida, selecione o botão </div>
+        <div class="specs">
+          <span>11.7px</span><span>peso 400</span>
+          <span>linha 15.6px</span>
+        </div>
+      </div><div class="estilo">
+        <div class="rotulo"><b>Legenda</b><code>span</code><span>173×</span></div>
+        <div class="demo" style="font-family:RobotoRegular, source-han-sans-simplified-c, &quot;Noto Sans SC&quot;, SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;font-size:11.7px;font-weight:500;line-height:14.625px;letter-spacing:normal;text-transform:none">Backspace</div>
+        <div class="specs">
+          <span>11.7px</span><span>peso 500</span>
+          <span>linha 14.625px</span>
+        </div>
+      </div></div><h3>Arquivos de fonte capturados <em>6</em></h3><div class="tabela"><div><code>Roboto</code><span>400 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2</span></div><div><code>Roboto</code><span>500 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2</span></div><div><code>Roboto</code><span>700 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2</span></div><div><code>Noto Sans SC</code><span>400 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR</span></div><div><code>Noto Sans SC</code><span>500 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR</span></div><div><code>Noto Sans SC</code><span>700 normal</span>
+        <span class="sub">_ext/fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR</span></div></div></section>
+  <section id="espacamento"><h2>Espaçamento</h2>
+    <p class="ajuda">Não deu para deduzir uma escala regular. O site parece usar valores livres.</p>
+    <div class="escala">
+      
+        <div class="passo">
+          <div class="barra" style="width:2%"></div>
+          <code>1.95px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:2%"></div>
+          <code>3.9px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:3.3333333333333335%"></div>
+          <code>7.8px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:4.166666666666666%"></div>
+          <code>9.75px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:5%"></div>
+          <code>11.7px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:6.666666666666667%"></div>
+          <code>15.6px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:8.333333333333332%"></div>
+          <code>19.5px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:16.666666666666664%"></div>
+          <code>39px</code>
+        </div>
+        <div class="passo">
+          <div class="barra" style="width:100%"></div>
+          <code>234px</code>
+        </div>
+    </div></section>
+  <section id="formas"><h2>Formas</h2><h3>Raios de borda</h3><div class="formas"><div class="forma"><div class="quad" style="border-radius:11.7px"></div><code>11.7px</code></div><div class="forma"><div class="quad" style="border-radius:7.8px"></div><code>7.8px</code></div><div class="forma"><div class="quad" style="border-radius:5.8px"></div><code>5.8px</code></div><div class="forma"><div class="quad" style="border-radius:9999px"></div><code>9999px</code></div></div><h3>Sombras</h3><div class="formas"><div class="forma"><div class="quad clara" style="box-shadow:rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px"></div><code class="quebra">rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0</code></div><div class="forma"><div class="quad clara" style="box-shadow:rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px"></div><code class="quebra">rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0</code></div><div class="forma"><div class="quad clara" style="box-shadow:rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px"></div><code class="quebra">rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0</code></div></div><h3>Gradientes</h3><div class="formas"><div class="forma"><div class="quad" style="background:linear-gradient(to right, rgb(96, 165, 250), rgb(192, 132, 252))"></div><code class="quebra">linear-gradient(to right, rgb(96, 165, 250), r</code></div></div></section>
+  <section id="movimento"><h2>Movimento</h2><p class="ajuda">Passe o mouse nas barras para ver a curva em movimento.</p><div class="mov"><div class="trilho" style="--d:0.15s;--c:cubic-bezier(0.4, 0, 0.2, 1)">
+        <div class="bolinha"></div>
+        <div class="rot"><code>0.15s</code><span>cubic-bezier(0.4, 0, 0.2, 1)</span></div>
+      </div><div class="trilho" style="--d:0.3s;--c:cubic-bezier(0.4, 0, 0.2, 1)">
+        <div class="bolinha"></div>
+        <div class="rot"><code>0.3s</code><span>cubic-bezier(0.4, 0, 0.2, 1)</span></div>
+      </div><div class="trilho" style="--d:0.2s;--c:cubic-bezier(0.4, 0, 0.2, 1)">
+        <div class="bolinha"></div>
+        <div class="rot"><code>0.2s</code><span>cubic-bezier(0.4, 0, 0.2, 1)</span></div>
+      </div></div><h3>Animações declaradas <em>25</em></h3><div class="pastilhas"><code>bounce</code><code>gradient-x</code><code>pulse</code><code>spin</code><code>enter</code><code>exit</code><code>accordion-up</code><code>accordion-down</code><code>swipe-out-left</code><code>swipe-out-right</code><code>swipe-out-up</code><code>swipe-out-down</code><code>sonner-fade-in</code><code>sonner-fade-out</code><code>sonner-spin</code><code>fadeIn</code><code>fadeOut</code><code>slideFromBottom</code><code>slideToBottom</code><code>slideFromTop</code><code>slideToTop</code><code>slideFromLeft</code><code>slideToLeft</code><code>slideFromRight</code><code>slideToRight</code></div></section>
+  <section id="breakpoints"><h2>Breakpoints</h2><div class="bps">
+    <div class="bp">
+      <div class="regua"><span style="width:25%"></span></div>
+      <code>640px</code><span class="sub">(min-width: 640px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:30%"></span></div>
+      <code>768px</code><span class="sub">(min-width: 768px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:40%"></span></div>
+      <code>1024px</code><span class="sub">(min-width: 1024px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:50%"></span></div>
+      <code>1280px</code><span class="sub">(min-width: 1280px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:60%"></span></div>
+      <code>1536px</code><span class="sub">(min-width: 1536px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:75%"></span></div>
+      <code>1920px</code><span class="sub">(min-width: 1920px)</span>
+    </div>
+    <div class="bp">
+      <div class="regua"><span style="width:100%"></span></div>
+      <code>2560px</code><span class="sub">(min-width: 2560px)</span>
+    </div></div></section>
+  <section id="variaveis"><h2>Variáveis do site</h2>
+    <p class="ajuda">Custom properties declaradas pelo próprio site. Quando existem, costumam ser o design system oficial do projeto, com os nomes que a equipe usa.</p>
+    <div class="vars">
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-border-spacing-x</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-border-spacing-y</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-translate-x</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-translate-y</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-rotate</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-skew-x</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-skew-y</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-scale-x</code><span>1</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-scale-y</code><span>1</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-scroll-snap-strictness</code><span>proximity</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ring-offset-width</code><span>0px</span>
+      </div>
+      <div class="var">
+        <i style="background:#fff"></i>
+        <code>--tw-ring-offset-color</code><span>#fff</span>
+      </div>
+      <div class="var">
+        <i style="background:rgb(59 130 246 / .5)"></i>
+        <code>--tw-ring-color</code><span>rgb(59 130 246 / .5)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ring-offset-shadow</code><span>0 0 #0000</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ring-shadow</code><span>0 0 #0000</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-shadow</code><span>0 0 #0000</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-shadow-colored</code><span>0 0 #0000</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-content</code><span>&quot;&quot;</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--background</code><span>0 0% 3.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--card</code><span>0 0% 3.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--card-foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--popover</code><span>0 0% 3.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--popover-foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--primary</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--primary-foreground</code><span>0 0% 9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--secondary</code><span>0 0% 14.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--secondary-foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--muted</code><span>0 0% 18.5%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--muted-foreground</code><span>0 0% 63.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--accent</code><span>0 0% 14.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--accent-foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--destructive</code><span>0 62.8% 30.6%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--destructive-foreground</code><span>0 0% 98%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--border</code><span>0 0% 14.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--input</code><span>0 0% 14.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--ring</code><span>0 0% 83.1%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--chart-1</code><span>220 70% 50%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--chart-2</code><span>160 60% 45%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--chart-3</code><span>30 80% 55%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--chart-4</code><span>280 65% 60%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--chart-5</code><span>340 75% 55%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--radius</code><span>.5rem</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-background</code><span>240 5.9% 10%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-foreground</code><span>240 4.8% 95.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-primary</code><span>224.3 76.3% 48%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-primary-foreground</code><span>0 0% 100%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-accent</code><span>240 3.7% 15.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-accent-foreground</code><span>240 4.8% 95.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-border</code><span>240 3.7% 15.9%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--sidebar-ring</code><span>217.2 91.2% 59.8%</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-space-x-reverse</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-space-y-reverse</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-border-opacity</code><span>1</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-bg-opacity</code><span>1</span>
+      </div>
+      <div class="var">
+        <i style="background:#fbbf24 var(--tw-gradient-from-position)"></i>
+        <code>--tw-gradient-from</code><span>#fbbf24 var(--tw-gradient-from-position)</span>
+      </div>
+      <div class="var">
+        <i style="background:rgb(251 191 36 / 0) var(--tw-gradient-to-position)"></i>
+        <code>--tw-gradient-to</code><span>rgb(251 191 36 / 0) var(--tw-gradient-to-position)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-gradient-stops</code><span>var(--tw-gradient-from), var(--tw-gradient-to)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-numeric-spacing</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-text-opacity</code><span>1</span>
+      </div>
+      <div class="var">
+        <i style="background:rgb(34 197 94 / .3)"></i>
+        <code>--tw-shadow-color</code><span>rgb(34 197 94 / .3)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ring-inset</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ring-opacity</code><span>1</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-blur</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-drop-shadow</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-grayscale</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-blur</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-enter-opacity</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-enter-scale</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-enter-rotate</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-enter-translate-x</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-enter-translate-y</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--header-height</code><span>3rem</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--spacing</code><span>.25rem</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-exit-opacity</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-exit-scale</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-exit-rotate</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-exit-translate-x</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-exit-translate-y</code><span>initial</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-pan-x</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-pan-y</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-pinch-zoom</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-gradient-from-position</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-gradient-via-position</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-gradient-to-position</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-ordinal</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-slashed-zero</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-numeric-figure</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-numeric-fraction</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-brightness</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-contrast</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-hue-rotate</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-invert</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-saturate</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-sepia</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-brightness</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-contrast</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-grayscale</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-hue-rotate</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-invert</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-opacity</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-saturate</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-backdrop-sepia</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-contain-size</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-contain-layout</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-contain-paint</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--tw-contain-style</code><span></span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-icon-margin-start</code><span>-3px</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-icon-margin-end</code><span>4px</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-svg-margin-start</code><span>-1px</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-svg-margin-end</code><span>0px</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-button-margin-start</code><span>auto</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-button-margin-end</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-close-button-start</code><span>0</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-close-button-end</code><span>unset</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--toast-close-button-transform</code><span>translate(-35%, -35%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 99%)"></i>
+        <code>--gray1</code><span>hsl(0, 0%, 99%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 97.3%)"></i>
+        <code>--gray2</code><span>hsl(0, 0%, 97.3%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 95.1%)"></i>
+        <code>--gray3</code><span>hsl(0, 0%, 95.1%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 93%)"></i>
+        <code>--gray4</code><span>hsl(0, 0%, 93%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 90.9%)"></i>
+        <code>--gray5</code><span>hsl(0, 0%, 90.9%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 88.7%)"></i>
+        <code>--gray6</code><span>hsl(0, 0%, 88.7%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 85.8%)"></i>
+        <code>--gray7</code><span>hsl(0, 0%, 85.8%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 78%)"></i>
+        <code>--gray8</code><span>hsl(0, 0%, 78%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 56.1%)"></i>
+        <code>--gray9</code><span>hsl(0, 0%, 56.1%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 52.3%)"></i>
+        <code>--gray10</code><span>hsl(0, 0%, 52.3%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 43.5%)"></i>
+        <code>--gray11</code><span>hsl(0, 0%, 43.5%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 9%)"></i>
+        <code>--gray12</code><span>hsl(0, 0%, 9%)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--border-radius</code><span>8px</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--y</code><span>translateY(100%)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--lift-amount</code><span>calc(var(--lift) * var(--gap))</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--lift</code><span>1</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--scale</code><span>var(--toasts-before) * 0.05 + 1</span>
+      </div>
+      <div class="var">
+        <i style="background:#fff"></i>
+        <code>--normal-bg</code><span>#fff</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--normal-border</code><span>var(--gray4)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--normal-text</code><span>var(--gray12)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(143, 85%, 96%)"></i>
+        <code>--success-bg</code><span>hsl(143, 85%, 96%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(145, 92%, 87%)"></i>
+        <code>--success-border</code><span>hsl(145, 92%, 87%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(140, 100%, 27%)"></i>
+        <code>--success-text</code><span>hsl(140, 100%, 27%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(208, 100%, 97%)"></i>
+        <code>--info-bg</code><span>hsl(208, 100%, 97%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(221, 91%, 93%)"></i>
+        <code>--info-border</code><span>hsl(221, 91%, 93%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(210, 92%, 45%)"></i>
+        <code>--info-text</code><span>hsl(210, 92%, 45%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(49, 100%, 97%)"></i>
+        <code>--warning-bg</code><span>hsl(49, 100%, 97%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(49, 91%, 84%)"></i>
+        <code>--warning-border</code><span>hsl(49, 91%, 84%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(31, 92%, 45%)"></i>
+        <code>--warning-text</code><span>hsl(31, 92%, 45%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(359, 100%, 97%)"></i>
+        <code>--error-bg</code><span>hsl(359, 100%, 97%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(359, 100%, 94%)"></i>
+        <code>--error-border</code><span>hsl(359, 100%, 94%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(360, 100%, 45%)"></i>
+        <code>--error-text</code><span>hsl(360, 100%, 45%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 12%)"></i>
+        <code>--normal-bg-hover</code><span>hsl(0, 0%, 12%)</span>
+      </div>
+      <div class="var">
+        <i style="background:hsl(0, 0%, 25%)"></i>
+        <code>--normal-border-hover</code><span>hsl(0, 0%, 25%)</span>
+      </div>
+      <div class="var">
+        <i class="vazio"></i>
+        <code>--size</code><span>16px</span>
+      </div></div>
+    </section>
+</main>
+
+<footer>
+  Gerado pelo <b>Extrator de Sites Brave Cross</b> em 13/11/2026, 18:57:54.<br>
+  Os valores vêm dos estilos computados das páginas visitadas somados à leitura de
+  3 arquivo(s) de CSS baixado. O peso de cada token é a área
+  que ele ocupa na tela, não a contagem de elementos.<br><br>
+  Ao lado deste arquivo: <code>tokens.css</code> para colar no projeto e
+  <code>tokens.json</code> com os dados completos.
+</footer>
+
+</body>
+</html>

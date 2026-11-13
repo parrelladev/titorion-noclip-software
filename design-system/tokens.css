@@ -1,0 +1,227 @@
+/*
+ * Tokens extraídos de https://titorion.i-game.tech/#/pressKey
+ * Gerado pelo Extrator de Sites Brave Cross em 13/11/2026, 18:57:54
+ *
+ * Os nomes são nossos: o site original não os expõe. A ordem segue o
+ * peso visual de cada valor, ou seja, quanto de tela ele ocupa.
+ */
+
+:root {
+  /* fundo */
+  --ds-fundo-1: #0a0a0a;
+  --ds-fundo-2: #262626;
+  --ds-fundo-3: #2f2f2f;
+  --ds-fundo-4: #0f172a;
+
+  /* texto */
+  --ds-texto-1: #fafafa;
+  --ds-texto-2: #a3a3a3;
+  --ds-texto-3: #171717;
+  --ds-texto-4: #94a3b8;
+
+  /* acento */
+  --ds-acento-1: #22c55e;
+
+  /* tipografia */
+  --ds-fonte-1: RobotoRegular, source-han-sans-simplified-c, "Noto Sans SC", SourceHanSansCN, sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
+  --ds-tamanho-1: 11.7px;
+  --ds-tamanho-2: 13.65px;
+  --ds-tamanho-3: 15.6px;
+
+  /* espaçamento */
+  --ds-espaco-1: 1.95px;
+  --ds-espaco-2: 3.9px;
+  --ds-espaco-3: 7.8px;
+  --ds-espaco-4: 9.75px;
+  --ds-espaco-5: 11.7px;
+  --ds-espaco-6: 15.6px;
+  --ds-espaco-7: 19.5px;
+  --ds-espaco-8: 39px;
+  --ds-espaco-9: 234px;
+
+  /* raios */
+  --ds-raio-1: 11.7px;
+  --ds-raio-2: 7.8px;
+  --ds-raio-3: 5.8px;
+  --ds-raio-4: 9999px;
+
+  /* sombras */
+  --ds-sombra-1: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
+  --ds-sombra-2: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  --ds-sombra-3: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+
+  /* movimento */
+  --ds-duracao-1: 0.15s;
+  --ds-duracao-2: 0.3s;
+  --ds-duracao-3: 0.2s;
+  --ds-curva-1: cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+/* ------------------------------------------------------------------ */
+/* Custom properties declaradas pelo próprio site. Os nomes aqui são   */
+/* dele, não nossos. Costumam ser o design system real do projeto.     */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / .5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-content: "";
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 18.5%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --radius: .5rem;
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+  --tw-space-x-reverse: 0;
+  --tw-space-y-reverse: 0;
+  --tw-border-opacity: 1;
+  --tw-bg-opacity: 1;
+  --tw-gradient-from: #fbbf24 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(251 191 36 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-numeric-spacing: ;
+  --tw-text-opacity: 1;
+  --tw-shadow-color: rgb(34 197 94 / .3);
+  --tw-ring-inset: ;
+  --tw-ring-opacity: 1;
+  --tw-blur: ;
+  --tw-drop-shadow: ;
+  --tw-grayscale: ;
+  --tw-backdrop-blur: ;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+  --header-height: 3rem;
+  --spacing: .25rem;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-fraction: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-contain-size: ;
+  --tw-contain-layout: ;
+  --tw-contain-paint: ;
+  --tw-contain-style: ;
+  --toast-icon-margin-start: -3px;
+  --toast-icon-margin-end: 4px;
+  --toast-svg-margin-start: -1px;
+  --toast-svg-margin-end: 0px;
+  --toast-button-margin-start: auto;
+  --toast-button-margin-end: 0;
+  --toast-close-button-start: 0;
+  --toast-close-button-end: unset;
+  --toast-close-button-transform: translate(-35%, -35%);
+  --gray1: hsl(0, 0%, 99%);
+  --gray2: hsl(0, 0%, 97.3%);
+  --gray3: hsl(0, 0%, 95.1%);
+  --gray4: hsl(0, 0%, 93%);
+  --gray5: hsl(0, 0%, 90.9%);
+  --gray6: hsl(0, 0%, 88.7%);
+  --gray7: hsl(0, 0%, 85.8%);
+  --gray8: hsl(0, 0%, 78%);
+  --gray9: hsl(0, 0%, 56.1%);
+  --gray10: hsl(0, 0%, 52.3%);
+  --gray11: hsl(0, 0%, 43.5%);
+  --gray12: hsl(0, 0%, 9%);
+  --border-radius: 8px;
+  --y: translateY(100%);
+  --lift-amount: calc(var(--lift) * var(--gap));
+  --lift: 1;
+  --scale: var(--toasts-before) * 0.05 + 1;
+  --normal-bg: #fff;
+  --normal-border: var(--gray4);
+  --normal-text: var(--gray12);
+  --success-bg: hsl(143, 85%, 96%);
+  --success-border: hsl(145, 92%, 87%);
+  --success-text: hsl(140, 100%, 27%);
+  --info-bg: hsl(208, 100%, 97%);
+  --info-border: hsl(221, 91%, 93%);
+  --info-text: hsl(210, 92%, 45%);
+  --warning-bg: hsl(49, 100%, 97%);
+  --warning-border: hsl(49, 91%, 84%);
+  --warning-text: hsl(31, 92%, 45%);
+  --error-bg: hsl(359, 100%, 97%);
+  --error-border: hsl(359, 100%, 94%);
+  --error-text: hsl(360, 100%, 45%);
+  --normal-bg-hover: hsl(0, 0%, 12%);
+  --normal-border-hover: hsl(0, 0%, 25%);
+  --size: 16px;
+}
+
+/* breakpoints encontrados */
+/* @media (min-width: 640px)  (2x) */
+/* @media (min-width: 768px)  (2x) */
+/* @media (min-width: 1024px)  (2x) */
+/* @media (min-width: 1280px)  (1x) */
+/* @media (min-width: 1536px)  (1x) */
+/* @media (min-width: 1920px)  (1x) */
+/* @media (min-width: 2560px)  (1x) */
