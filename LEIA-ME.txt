@@ -1,0 +1,86 @@
+SITE BAIXADO COM O "EXTRATOR DE SITES BRAVE CROSS"
+============================================================
+
+Origem : https://titorion.i-game.tech/#/pressKey
+Data   : 13/11/2026, 18:57:54
+Paginas: 1
+Assets : 122 (11.0 MB)
+Falhas : 9
+
+COMO ABRIR
+------------------------------------------------------------
+
+Execute o arquivo "ABRIR SITE.cmd" que esta nesta pasta.
+
+Ele encontra o Python, sobe o servidor na primeira porta livre e abre
+o site no navegador sozinho. E o unico arquivo que voce precisa tocar.
+
+Nao abra o index.html com dois cliques. O navegador bloqueia, em
+paginas abertas direto do disco, exatamente o que um site 3D usa:
+modulos ES, fetch() de modelos .glb, texturas WebGL e fontes.
+
+O servidor tambem cobre a navegacao de SPA: se o site usa Next.js,
+Nuxt ou SvelteKit e o roteador pedir "/sobre" de volta ao servidor,
+ele entrega o arquivo certo em vez de uma pagina de erro.
+
+ESTRUTURA
+------------------------------------------------------------
+
+  ABRIR SITE.cmd        inicia o servidor e abre o site
+  index.html            pagina principal
+  _ext/<dominio>/       arquivos que vinham de CDNs (GSAP, fontes...)
+  __offline/runtime.js  camada que redireciona as URLs para os
+                        arquivos locais em tempo de execucao
+  __offline/servidor.py motor do servidor local
+  __offline/relatorio.json  o que foi baixado e o que falhou
+  design-system.html    o design system montado com o CSS do proprio site
+  design-system/        a mesma leitura em folha neutra, mais os tokens
+
+FALHAS
+------------------------------------------------------------
+
+Estes recursos nao vieram. Em geral sao rastreadores, endpoints que
+exigem login ou arquivos acima do limite de tamanho configurado.
+O site costuma funcionar sem eles.
+
+  [404] https://apitest.i-game.tech/api/device/upgrade: HTTP 404
+  [400] https://fonts.googleapis.com/css2?family=Source+Han+Sans+SC:wght@300;400;500;600&display=swap: HTTP 400
+  [404] https://titorion.i-game.tech/assets/skyshiu_logo.jpg: HTTP 404
+  [404] https://titorion.i-game.tech/assets/MK812-drak-logo.png: HTTP 404
+  [404] https://titorion.i-game.tech/assets/MK812-light-logo.png: HTTP 404
+  [404] https://titorion.i-game.tech/assets/tkjy_logo.jpg: HTTP 404
+  [404] https://titorion.i-game.tech/assets/KG27_logo.png: HTTP 404
+  [404] https://titorion.i-game.tech/assets/K80_logo.png: HTTP 404
+  [404] https://titorion.i-game.tech/assets/MK010_logo.png: HTTP 404
+
+DESIGN SYSTEM
+------------------------------------------------------------
+
+  http://localhost:<porta>/design-system.html
+
+E uma biblioteca viva, nao um relatorio: o hero clonado do site com o
+texto trocado para apresentar o proprio design system, a tipografia com
+as tags e classes originais, e cada componente pintado pelo CSS do site.
+Nada foi redesenhado nem aproximado.
+
+Abra pelo servidor, nao com dois cliques: a pagina carrega as folhas de
+estilo do site por caminho absoluto.
+
+O JavaScript de aplicacao fica de fora de proposito. React e Next
+tentariam hidratar uma arvore que nao e a que eles geraram e apagariam
+a pagina. Por isso o que depende de script (canvas 3D, carrossel) aparece
+parado, no estado em que estava na hora da captura.
+
+Em design-system/ ficam a mesma leitura em folha neutra (index.html),
+tokens.css pronto para colar num projeto e tokens.json com tudo.
+
+DIAGNOSTICO
+------------------------------------------------------------
+
+Se algo nao aparecer, abra o console do navegador (F12) e rode:
+
+  __EXBC_OFFLINE__.stats        // quantas URLs foram redirecionadas
+  __EXBC_OFFLINE__.resolve(u)   // para onde uma URL aponta agora
+
+Um numero alto em "misses" indica assets que nao chegaram a ser
+baixados: capture de novo com mais passadas de rolagem.
